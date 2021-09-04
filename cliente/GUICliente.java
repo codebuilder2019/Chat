@@ -204,7 +204,7 @@ public class GUICliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCerraSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerraSesionActionPerformed
-        this.fijarContactos(new String[]{"Lula","Juanito","Peppe"});
+        
     }//GEN-LAST:event_jButtonCerraSesionActionPerformed
 
     public void fijarTexto(String nombre, String msg) {
