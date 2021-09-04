@@ -1,416 +1,280 @@
-package cliente;
+package Cliente;
 
-
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.WindowConstants;
-import sop_rmi.ClienteInt;
-import sop_rmi.ServidorUsuariosInt;
-
-
-
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo
- * SWT/Swing GUI Builder, which is free for non-commercial
- * use. If Jigloo is being used commercially (ie, by a corporation,
- * company or business for any purpose whatever) then you
- * should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details.
- * Use of Jigloo implies acceptance of these licensing terms.
- * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
- * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
- * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * @author Aliro Correa - Septiembre de 2021
  */
 public class GUICliente extends javax.swing.JFrame {
 
-	{
-		//Set Look & Feel
-		try {
-			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-	}
+    public GUICliente() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+    }
 
-	private JPanel jpanelconexion;
-	private JLabel jlabelcliente;
-        private JLabel jlabelclienteChat;
-        private JLabel jlabelclienteNombre;
-	private JLabel jlabelservidor;
-	private JTextField jtextfieldservidor;
-	private JPanel jpanelchat;
-	private JTextField jtextfieldpuerto;
-	private JTextArea jtextareamsg;
-	private JTextArea jtextareacontacto;
-	private JTextArea jtextareachat;
-	private JScrollPane jscrollpane1contacto;
-	private JScrollPane jscrollpane1chat;
-	private JScrollPane jscrollpane1msg;
-	private JButton jbuttonsalir;
-	private JButton jbuttonenviar;
-	private JButton jbuttonconec;
-	private JTextField jtextfieldcliente;
-	private JLabel jlabelpuerto;
-	private JButton jButton1;
-	ServidorUsuariosInt svrchat;        
-        ClienteInt objcllbck;
-	String nombre;
-        
-	int opin=0;
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-	/**
-	 * Auto-generated main method to display this JFrame
-         * @param args
-	 */
-	public static void main(String[] args) {
-		GUICliente inst = new GUICliente();
-		inst.setVisible(true);
-	}
+        jPanelSuperior = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonCerraSesion = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelTituloChat = new javax.swing.JLabel();
+        jPanelCentral = new javax.swing.JPanel();
+        jLabelBienvenido = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaChat = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListUsuarios = new javax.swing.JList<>();
+        jLabelMensaje = new javax.swing.JLabel();
+        jButtonEnviar = new javax.swing.JButton();
+        jLabelConectados = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextAreaMensaje = new javax.swing.JTextArea();
+        jPanelInferior = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabelCreditos = new javax.swing.JLabel();
 
-	public GUICliente() {
-		super();
-		initGUI();
-	}
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Chat Grupal - RMI - Sistemas Distribuidos 2021-1 ");
+        setResizable(false);
 
-	private void initGUI() {
-		try {
-			{
-				this.setEnabled(true);
-			}
-			{
-				//jButtonHis.setVisible(false);
-			}
-			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			BorderLayout thisLayout = new BorderLayout();
-			getContentPane().setLayout(thisLayout);
-			this.setVisible(false);
-			{
-				jpanelconexion = new JPanel();
-				getContentPane().add(jpanelconexion, BorderLayout.CENTER);
-				GridBagLayout PanelConexionLayout = new GridBagLayout();
-				PanelConexionLayout.columnWidths = new int[] { 156, 21, 7 };
-				PanelConexionLayout.rowHeights = new int[] { 59, 42, 48 };
-				PanelConexionLayout.columnWeights = new double[] { 0.0, 0.0,
-						0.1 };
-				PanelConexionLayout.rowWeights = new double[] { 0.0, 0.0, 0.0 };
-				jpanelconexion.setLayout(PanelConexionLayout);
-				jpanelconexion
-					.setPreferredSize(new java.awt.Dimension(392, -1));
-				{
-					jlabelcliente = new JLabel();
-					jpanelconexion.add(jlabelcliente, new GridBagConstraints(
-						0,
-						0,
-						1,
-						1,
-						0.0,
-						0.0,
-						GridBagConstraints.CENTER,
-						GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0),
-						0,
-						0));
-					jlabelcliente.setText("NickName del usuario: ");
-				}
-				{
-					jlabelservidor = new JLabel();
-					jpanelconexion.add(jlabelservidor, new GridBagConstraints(
-						0,
-						1,
-						1,
-						1,
-						0.0,
-						0.0,
-						GridBagConstraints.CENTER,
-						GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0),
-						0,
-						0));
-					jlabelservidor.setText("Dirección ip del rmiregistry");
-				}
-				{
-					jlabelpuerto = new JLabel();
-					jpanelconexion.add(jlabelpuerto, new GridBagConstraints(
-						0,
-						2,
-						1,
-						1,
-						0.0,
-						0.0,
-						GridBagConstraints.CENTER,
-						GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0),
-						0,
-						0));
-					jlabelpuerto.setText("Puerto del rmiregistry");
-				}
-				{
-					jtextfieldcliente = new JTextField();
-					jpanelconexion.add(
-						jtextfieldcliente,
-						new GridBagConstraints(
-							2,
-							0,
-							1,
-							1,
-							0.0,
-							0.0,
-							GridBagConstraints.WEST,
-							GridBagConstraints.HORIZONTAL,
-							new Insets(0, 0, 0, 25),
-							0,
-							0));
-				}
-				{
-					jtextfieldservidor = new JTextField();
-					jpanelconexion.add(
-						jtextfieldservidor,
-						new GridBagConstraints(
-							2,
-							1,
-							1,
-							1,
-							0.0,
-							0.0,
-							GridBagConstraints.CENTER,
-							GridBagConstraints.HORIZONTAL,
-							new Insets(0, 0, 0, 25),
-							0,
-							0));
-				}
-				{
-					jtextfieldpuerto = new JTextField();
-					jpanelconexion.add(
-						jtextfieldpuerto,
-						new GridBagConstraints(
-							2,
-							2,
-							1,
-							1,
-							0.0,
-							0.0,
-							GridBagConstraints.CENTER,
-							GridBagConstraints.HORIZONTAL,
-							new Insets(0, 0, 0, 25),
-							0,
-							0));
-				}
-				{
-					jbuttonconec = new JButton();
-					jpanelconexion.add(jbuttonconec, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-					jbuttonconec.setText("Conectar");
-					jbuttonconec
-						.setBackground(new java.awt.Color(230, 230, 250));
-					jbuttonconec.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							jButtonConecActionPerformed(evt);
-						}
-					});
-				}
-				{
-					jButton1 = new JButton();
-					jpanelconexion.add(jButton1, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-					jButton1.setText("Salir");
-					jButton1.setBackground(new java.awt.Color(230,230,250));
-					jButton1.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							jButton1ActionPerformed(evt);
-						}
-					});
-				}
-			}
-			{
-				jpanelchat = new JPanel();
-				getContentPane().add(jpanelchat, BorderLayout.NORTH);
-				GridBagLayout jPanelCalcularLayout = new GridBagLayout();
-				jPanelCalcularLayout.columnWidths = new int[] {29, 161, 168, 7};
-				jPanelCalcularLayout.rowHeights = new int[] {7, 62, 46, 49, 44, 38};
-				jPanelCalcularLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.1};
-				jPanelCalcularLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-				jpanelchat.setLayout(jPanelCalcularLayout);
-				jpanelchat.setPreferredSize(new java.awt.Dimension(388, 269));
-				jpanelchat.setVisible(false);
-				{
-					jbuttonenviar = new JButton();
-					jpanelchat.add(jbuttonenviar, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-					jbuttonenviar.setText("Enviar");
-					jbuttonenviar.setBackground(new java.awt.Color(230,230,250));
-					jbuttonenviar.setEnabled(false);
-					jbuttonenviar.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							jbuttonenviarActionPerformed(evt);
-						}
-					});
-				}
-                                
-				{
-					jlabelclienteNombre = new JLabel();
-					jpanelchat.add(jlabelclienteNombre, new GridBagConstraints(
-						0,
-						0,
-						1,
-						1,
-						0.0,
-						0.0,
-						GridBagConstraints.FIRST_LINE_START,
-						GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0),
-						0,
-						0));
-					jlabelclienteNombre.setText("Cliente");
-				}
-				{
-					jbuttonsalir = new JButton();
-					jpanelchat.add(jbuttonsalir, new GridBagConstraints(2, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-					jbuttonsalir.setText("Salir");
-					jbuttonsalir.setBackground(new java.awt.Color(230,230,250));
-					jbuttonsalir.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							jbuttonsalirActionPerformed(evt);
-						}
-					});
-				}
-				{
-					jscrollpane1msg = new JScrollPane();
-					jpanelchat.add(jscrollpane1msg, new GridBagConstraints(1, 4, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-					{
-						jtextareamsg = new JTextArea();
-						jscrollpane1msg.setViewportView(jtextareamsg);
-						jtextareamsg.addKeyListener(new KeyAdapter() {
-							public void keyPressed(KeyEvent evt) {
-								jtextareamsgKeyPressed(evt);
-							}
-						});
-					}
-				}
-				{
-					jscrollpane1chat = new JScrollPane();
-					jpanelchat.add(jscrollpane1chat, new GridBagConstraints(1, 1, 1, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-					{
-						jtextareachat = new JTextArea();
-						jscrollpane1chat.setViewportView(jtextareachat);
-						jtextareachat.setEnabled(false);
-					}
-				}
-				{
-					jscrollpane1contacto = new JScrollPane();
-					jpanelchat.add(jscrollpane1contacto, new GridBagConstraints(2, 1, 1, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-					{
-						jtextareacontacto = new JTextArea();
-						jscrollpane1contacto.setViewportView(jtextareacontacto);
-						jtextareacontacto.setEnabled(false);
-					}
-				}
-			
-			}
-			pack();
-			setSize(400, 300);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("aliroco00 en linea");
 
-	private void jButtonConecActionPerformed(ActionEvent evt) {
-		
-			jpanelconexion.setVisible(false);  
-                        nombre = jtextfieldcliente.getText();
-                        jlabelclienteNombre.setText(nombre);
-			javax.swing.JOptionPane.showMessageDialog(this,"Conectado: "+nombre);
-                        
-                        /*
-						*************************
-						Agregue el código que permite crear el objeto remoto de tipo UsuarioCallbckInt   
-						
-						Agregue el código que permite obtener la referencia del objeto remoto 
-						de tipo ServidorCallbackInt  
-						
-						Agregue el código que permite registrar en el servidor el objeto remoto del lado del cliente 
-						
-						************************
-						*/
-                       
-                                                  
-			jpanelchat.setVisible(true);    
-		
-	}
-	
-	public void fijarTexto(String nombre,String msg) {
-		System.out.println("Este método se invoca para informar al cliente de un mensaje nuevo en el chat");			
-		try { 
-		  jtextareachat.append(nombre + " dice:\n" + msg +"\n");
-	    } catch(Exception ex){}    	
-		//TODO add your code for jbuttonHistorial.actionPerformed
-	}
-	
-	public void fijarContacto(String nombre) {
-		System.out.println("Este método se invoca para informar al cliente que un nuevo ha entrado al chat");		
-		try {                  
-		  jtextareacontacto.append(nombre + " en linea\n");
-	    } catch(Exception ex){}    	   
-		//TODO add your code for jbuttonHistorial.actionPerformed
-	}
-	
-	public void fijarContactos(String nombre) {
-		System.out.println("Este método se invoca para actualizar el listado de contactos");			
-		try {                  
-		  jtextareacontacto.append(nombre + " en linea\n");
-	    } catch(Exception ex){}    	   
-		//TODO add your code for jbuttonHistorial.actionPerformed
-	}
-	
-	
-	private void jtextareamsgKeyPressed(KeyEvent evt) {
-		
-		jbuttonenviar.setEnabled(true);                
-		//TODO add your code for jtextareamsg.keyPressed
-	}
-	
-	private void jbuttonenviarActionPerformed(ActionEvent evt) {
-            try {
-               
-
-                //svrchat.enviarMensaje(nombre,jtextareamsg.getText());
-                
-            } catch (RemoteException ex) {
-                Logger.getLogger(GUICliente.class.getName()).log(Level.SEVERE, null, ex);
+        jButtonCerraSesion.setText("Cerra Sesion");
+        jButtonCerraSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerraSesionActionPerformed(evt);
             }
-		jtextareamsg.setText("");
-		//TODO add your code for jbuttonenviar.actionPerformed
-		
-	}
-	
-	private void jButton1ActionPerformed(ActionEvent evt) {
-		System.exit(0);		
-	}
-	
-	private void jbuttonsalirActionPerformed(ActionEvent evt) {		
-            try {
-                //svrchat.desconectarCliente(objcllbck, nombre);
-            } catch (RemoteException ex) {
-                Logger.getLogger(GUICliente.class.getName()).log(Level.SEVERE, null, ex);
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel2.setText("●");
+
+        jLabelTituloChat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelTituloChat.setText("Chat Grupal");
+
+        javax.swing.GroupLayout jPanelSuperiorLayout = new javax.swing.GroupLayout(jPanelSuperior);
+        jPanelSuperior.setLayout(jPanelSuperiorLayout);
+        jPanelSuperiorLayout.setHorizontalGroup(
+            jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
+                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSuperiorLayout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(jLabelTituloChat))
+                    .addGroup(jPanelSuperiorLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2)
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButtonCerraSesion))
+                    .addGroup(jPanelSuperiorLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelSuperiorLayout.setVerticalGroup(
+            jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabelTituloChat)
+                .addGap(3, 3, 3)
+                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCerraSesion))
+                .addGap(8, 8, 8)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
+
+        jLabelBienvenido.setText("Bienvenido al chat ");
+
+        jTextAreaChat.setColumns(20);
+        jTextAreaChat.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaChat.setLineWrap(true);
+        jTextAreaChat.setRows(5);
+        jTextAreaChat.setText("[alirocorrea]: como estan\n[luis]: bien y tu que tal\n[fernand]: saludos muchachos espero verlos pronto nuevamente en la universidad\n[alirocorrea]: como estan\n[luis]: bien y tu que tal\n\t\t>> aliro12 en linea\n[fernand]: saludos muchachos\n[alirocorrea]: como estan\n[luis]: bien y tu que tal\n[fernand]: saludos muchachos\n[alirocorrea]: como estan\n[luis]: bien y tu que tal\n[fernand]: saludos muchachos");
+        jTextAreaChat.setFocusable(false);
+        jScrollPane1.setViewportView(jTextAreaChat);
+
+        jListUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "antonio", "luis", "fernanda" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jListUsuarios.setFocusable(false);
+        jListUsuarios.setSelectionBackground(new java.awt.Color(0, 204, 102));
+        jScrollPane2.setViewportView(jListUsuarios);
+
+        jLabelMensaje.setText("Mensaje");
+
+        jButtonEnviar.setText("Enviar");
+
+        jLabelConectados.setText("Conectados");
+
+        jTextAreaMensaje.setColumns(20);
+        jTextAreaMensaje.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextAreaMensaje.setLineWrap(true);
+        jTextAreaMensaje.setRows(2);
+        jScrollPane4.setViewportView(jTextAreaMensaje);
+
+        javax.swing.GroupLayout jPanelCentralLayout = new javax.swing.GroupLayout(jPanelCentral);
+        jPanelCentral.setLayout(jPanelCentralLayout);
+        jPanelCentralLayout.setHorizontalGroup(
+            jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCentralLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCentralLayout.createSequentialGroup()
+                        .addComponent(jLabelBienvenido)
+                        .addGap(312, 312, 312)
+                        .addComponent(jLabelConectados))
+                    .addGroup(jPanelCentralLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelMensaje)
+                    .addGroup(jPanelCentralLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        jPanelCentralLayout.setVerticalGroup(
+            jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCentralLayout.createSequentialGroup()
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelBienvenido)
+                    .addComponent(jLabelConectados))
+                .addGap(6, 6, 6)
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jLabelMensaje)
+                .addGap(6, 6, 6)
+                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        getContentPane().add(jPanelCentral, java.awt.BorderLayout.CENTER);
+
+        jLabelCreditos.setForeground(new java.awt.Color(153, 153, 153));
+        jLabelCreditos.setText(" Desarrollado por Aliro Correa <aliriocorrea@unicauca.edu.co>  y  Jaime Garcia <gjaime@unicauca.edu.co>");
+
+        javax.swing.GroupLayout jPanelInferiorLayout = new javax.swing.GroupLayout(jPanelInferior);
+        jPanelInferior.setLayout(jPanelInferiorLayout);
+        jPanelInferiorLayout.setHorizontalGroup(
+            jPanelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInferiorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addComponent(jLabelCreditos, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanelInferiorLayout.setVerticalGroup(
+            jPanelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInferiorLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelCreditos)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanelInferior, java.awt.BorderLayout.PAGE_END);
+
+        getAccessibleContext().setAccessibleDescription("");
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCerraSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerraSesionActionPerformed
+        this.fijarContactos(new String[]{"Lula","Juanito","Peppe"});
+    }//GEN-LAST:event_jButtonCerraSesionActionPerformed
+
+    public void fijarTexto(String nombre, String msg) {
+        //Este método se invoca para informar al cliente de un mensaje nuevo en el chat
+        try {
+            jTextAreaChat.append("[" + nombre + "]: " + msg + "\n");
+        } catch (Exception ex) {
+            this.mensajeError("Excepcion FijarTexto() " + ex.getMessage());
+        }
+    }
+
+    public void fijarContacto(String nombre) {
+        //Este método se invoca para informar al cliente que un nuevo ha entrado al chat
+        try {
+            jTextAreaChat.append("\t\t" + nombre + " en linea\n");
+        } catch (Exception ex) {
+            this.mensajeError("Excepcion FijarContacto() " + ex.getMessage());
+        }
+        //TODO add your code for jbuttonHistorial.actionPerformed
+    }
+
+    public void fijarContactos(String[] nombres) {
+        //Este método se invoca para actualizar el listado de contactos
+        try {
+            DefaultListModel modelo = new DefaultListModel();
+            for(String nombre : nombres){
+                modelo.addElement(nombre);
             }
-		System.exit(0);	
-	}
+            jListUsuarios.setModel(modelo);
+        } catch (Exception ex) {
+            this.mensajeError("Excepcion FijarContactos() " + ex.getMessage());
+        }
+    }
         
-	public void borrarLista()
-	{
-		 jtextareacontacto.setText("");
-	}
+    private void mensajeSimple(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "MENSAJE",JOptionPane.PLAIN_MESSAGE);
+    }
+    
+    private void mensajeInformacion(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "INFORMACION",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private  void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "ERROR",JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void mensajeAdvertencia(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+    }
+        
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCerraSesion;
+    private javax.swing.JButton jButtonEnviar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelBienvenido;
+    private javax.swing.JLabel jLabelConectados;
+    private javax.swing.JLabel jLabelCreditos;
+    private javax.swing.JLabel jLabelMensaje;
+    private javax.swing.JLabel jLabelTituloChat;
+    private javax.swing.JList<String> jListUsuarios;
+    private javax.swing.JPanel jPanelCentral;
+    private javax.swing.JPanel jPanelInferior;
+    private javax.swing.JPanel jPanelSuperior;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextArea jTextAreaChat;
+    private javax.swing.JTextArea jTextAreaMensaje;
+    // End of variables declaration//GEN-END:variables
 }
