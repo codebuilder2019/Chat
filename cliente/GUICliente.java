@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -238,6 +239,7 @@ public class GUICliente extends javax.swing.JFrame implements Serializable{
     public void fijarContacto(String nombre) {
         //Este método se invoca para informar al cliente que un nuevo ha entrado al chat
         jTextAreaChat.append("\t\t" + nombre + " en linea\n");
+        System.out.println("_"+nombre + "_ == _" + this.nickname + "_");
         jList1Model.addElement(nombre);
     }
 
@@ -276,14 +278,15 @@ public class GUICliente extends javax.swing.JFrame implements Serializable{
     
     public void setConectados(){
         try {
+            this.jList1Model.removeAllElements();
             String[] clientes = cliente.ClienteDeObjetos.objRemoto.obtenerClientes();
             for(String usuario : clientes){
                 this.jList1Model.addElement(usuario);
             }
-            this.jList1Model.removeElement(this.nickname);
         } catch (RemoteException ex) {
            this.mensajeError(" Excepcion initConectados() " + ex.getMessage());
         }
+        
     }
     
     private void mensajeSimple(String mensaje){
