@@ -1,8 +1,11 @@
 package cliente;
 
+import cliente.sop_rmi.AdminCallbackImpl;
 import cliente.sop_rmi.UsuarioCallbackImpl;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -102,14 +105,23 @@ public class GUILogin extends javax.swing.JFrame  implements Serializable {
                 this.mensajeAdvertencia("Este nickname ya esta en uso");
             }
         } catch (RemoteException ex) {
-           this.mensajeError("Excepcion iniciarSesion() \n" + ex);
+           this.mensajeError("Excepcion iniciarCliente() \n" + ex);
         }
     }
     
     private void iniciarAdmin(){
-        GUIAdmin guiAdmin = new GUIAdmin();
-        guiAdmin.setVisible(true);
-	this.dispose();
+        boolean conexion = cliente.ClienteDeObjetos.obtenerObjAdmin();
+        if(conexion){
+            GUIAdmin guiAdmin = new GUIAdmin();
+            AdminCallbackImpl objReferenciaAdmin = new AdminCallbackImpl(guiAdmin);
+            try {
+                cliente.ClienteDeObjetos.objRemotoAdmin.addAdminitrator(objReferenciaAdmin);
+                guiAdmin.setVisible(true);
+                this.dispose();
+            } catch (RemoteException ex) {
+                this.mensajeError("Excepcion iniciarAdmin() \n" + ex);
+            }
+        }
     }
     
     private void mensajeInformacion(String mensaje){

@@ -23,7 +23,7 @@ public class UtilidadesRegistroC
         }
         catch (NotBoundException | MalformedURLException | RemoteException e)
         {
-            JOptionPane.showMessageDialog(null ,"Excepcion en obtencion del objeto remoto\"");
+            JOptionPane.showMessageDialog(null ,"Excepcion en obtencion del objeto remoto " + nameObjReg);
             return null;
         }
     }

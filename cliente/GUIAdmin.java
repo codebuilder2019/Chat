@@ -1,16 +1,21 @@
 package cliente;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Aliro Correa - Septiembre de 2021
  */
 public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
 
-
+    private DateTimeFormatter dateFormat;
+    
     public GUIAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
     }
 
     @SuppressWarnings("unchecked")
@@ -118,7 +123,9 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
     }// </editor-fold>//GEN-END:initComponents
 
     public void addMsg(int n){
-        jTextAreaChat.append("mensajes en el ultimo minuto: " + n);
+        String mensaje = "[" + dateFormat.format(LocalDateTime.now()) + "]" +
+                         " Cantidad de mensajes enviados en el ultimo minuto: " + n;
+        jTextAreaChat.append(mensaje);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
