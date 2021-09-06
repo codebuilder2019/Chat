@@ -11,11 +11,13 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
 {
     private ArrayList<ContactDTO> contacts;
     private ArrayList<MessageDTO> messages;
+    private int lastCountedMessage;
 
     public ServidorCallbackImpl() throws RemoteException {
         super();
-        contacts = new ArrayList();
-        messages = new ArrayList();
+        this.contacts = new ArrayList();
+        this.messages = new ArrayList();
+        this.lastCountedMessage = 0;
     }
 
     @Override
@@ -85,6 +87,14 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         }
 
         return allContacts;
+    }
+
+    @Override
+    public int obtenerCantidadMensajesEnCliclo() throws RemoteException {
+        int cycleMessageCount = this.messages.size() - lastCountedMessage;
+        lastCountedMessage = this.messages.size();
+
+        return cycleMessageCount;
     }
 
     private boolean findContact(String nickname) {
