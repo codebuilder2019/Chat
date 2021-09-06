@@ -23,7 +23,7 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
     @Override
     public boolean registrarCliente(UsuarioCallbackInt objReferencia, String nickname) throws RemoteException {
         System.out.println("Registrando cliente");
-
+        
         if(findContact(nickname)) {
             return false;
         } else {

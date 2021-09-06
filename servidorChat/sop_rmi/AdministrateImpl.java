@@ -8,12 +8,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import cliente.utilidades.UtilidadesRegistroC;
 
-public class AdministrateImpl extends UnicastRemoteObject implements AdministrateInt
+public class AdministrateImpl extends UnicastRemoteObject implements AdministrateInt, Runnable
 {
     private AdminCallbackInt administrator;
 
     public AdministrateImpl() throws RemoteException {
-        monitor();
+        super();
+
+        Thread thread = new Thread(this);
+        thread.start();
+    }
+    
+    @Override
+    public void run() {
+        try {
+            monitor();
+        } catch(Exception e) {
+            System.out.println("Error en monitoreo");
+        }
+        
     }
 
     @Override
