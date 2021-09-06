@@ -3,8 +3,6 @@ package cliente;
 import cliente.sop_rmi.UsuarioCallbackImpl;
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -89,6 +87,8 @@ public class GUILogin extends javax.swing.JFrame  implements Serializable {
             boolean autorizado = cliente.ClienteDeObjetos.objRemoto.registrarCliente(objReferencia, nickname);
             if(autorizado){
                 guiCliente.setInformacionUsuario(nickname);
+                guiCliente.setConectados();
+                guiCliente.setConfigDesconexion();
                 guiCliente.setVisible(true);
                 this.dispose();
             }else{

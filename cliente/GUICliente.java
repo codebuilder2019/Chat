@@ -1,5 +1,7 @@
 package cliente;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import javax.swing.DefaultListModel;
@@ -8,13 +10,14 @@ import javax.swing.JOptionPane;
 /**
  * @author Aliro Correa - Septiembre de 2021
  */
-public class GUICliente extends javax.swing.JFrame implements Serializable {
+public class GUICliente extends javax.swing.JFrame implements Serializable{
     
     private String nickname;
 
     public GUICliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.jList1Model = new DefaultListModel();
         this.jListUsuarios.setModel(jList1Model);
     }
@@ -46,6 +49,7 @@ public class GUICliente extends javax.swing.JFrame implements Serializable {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat Grupal - RMI - Sistemas Distribuidos 2021-1 ");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jLabelInformacionUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -215,6 +219,10 @@ public class GUICliente extends javax.swing.JFrame implements Serializable {
             cliente.ClienteDeObjetos.objRemoto.desconectarCliente(nickname);
         } catch (RemoteException ex) {
             this.mensajeError("Excepcion desonectarCliente() " + ex.getMessage());
+        } finally{
+            GUILogin guiLogin = new GUILogin();
+            guiLogin.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_jButtonCerraSesionActionPerformed
 
@@ -251,6 +259,30 @@ public class GUICliente extends javax.swing.JFrame implements Serializable {
             }
         } catch (RemoteException ex){
             this.mensajeError("Excepcion enviarMensaje() " + ex.getMessage());
+        }
+    }
+    
+    public void setConfigDesconexion() {
+        this.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+            try {
+                cliente.ClienteDeObjetos.objRemoto.desconectarCliente(nickname);
+            } catch (RemoteException ex) {
+                JOptionPane.showMessageDialog(null,"Excepcion setConfigDesconexion() " + ex.getMessage());
+            }
+        }
+        });
+    }
+    
+    public void setConectados(){
+        try {
+            String[] clientes = cliente.ClienteDeObjetos.objRemoto.obtenerClientes();
+            for(String usuario : clientes){
+                this.jList1Model.addElement(usuario);
+            }
+            this.jList1Model.removeElement(this.nickname);
+        } catch (RemoteException ex) {
+           this.mensajeError(" Excepcion initConectados() " + ex.getMessage());
         }
     }
     
