@@ -1,9 +1,16 @@
-package Cliente;
+package cliente;
+
+import cliente.sop_rmi.UsuarioCallbackImpl;
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * @author Aliro Correa - Semptiembre de 2021
  */
-public class GUILogin extends javax.swing.JFrame {
+public class GUILogin extends javax.swing.JFrame  implements Serializable {
 
     public GUILogin() {
         initComponents();
@@ -29,40 +36,81 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel2.setText("Ingresa un nickname");
 
         jButtonIniciar.setText("Iniciar");
+        jButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldUsuario)
-                    .addComponent(jButtonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(51, 51, 51))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextFieldUsuario)
+                        .addComponent(jButtonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonIniciar)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
+        if(this.jTextFieldUsuario.getText().length() > 1){
+            this.iniciarSesion();
+        }else{
+            this.mensajeAdvertencia("el nickname debe contener minimo 2 caracteres");
+        }
+    }//GEN-LAST:event_jButtonIniciarActionPerformed
+
+    public void iniciarSesion(){
+        String nickname = this.jTextFieldUsuario.getText();
+        GUICliente guiCliente = new GUICliente();
+        try {
+            UsuarioCallbackImpl objReferencia = new UsuarioCallbackImpl(guiCliente);
+            boolean autorizado = cliente.ClienteDeObjetos.objRemoto.registrarCliente(objReferencia, nickname);
+            if(autorizado){
+                guiCliente.setInformacionUsuario(nickname);
+                guiCliente.setVisible(true);
+                this.dispose();
+            }else{
+                this.mensajeAdvertencia("Este nickname ya esta en uso");
+            }
+        } catch (RemoteException ex) {
+           this.mensajeError("Excepcion iniciarSesion() \n" + ex);
+        }
+    }
+    
+    private void mensajeInformacion(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "INFORMACION",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private  void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "ERROR",JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void mensajeAdvertencia(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIniciar;
     private javax.swing.JLabel jLabel1;

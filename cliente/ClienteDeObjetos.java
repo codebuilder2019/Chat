@@ -1,16 +1,11 @@
 package cliente;
 
-import SGestionAnteproyectos.service.User;
-import SGestionAnteproyectos.sop_rmi.GestionAnteproyectosInt;
-import SGestionAnteproyectos.sop_rmi.GestionUsuariosInt;
-import cliente.sop_rmi.DirectorCllbckImpl;
-import cliente.Utilidades.UtilidadesRegistroC;
-import SSeguimientoAnteproyectos.sop_rmi.SeguimientoAnteproyectosInt;
-import java.rmi.ConnectException;
+import cliente.utilidades.UtilidadesRegistroC;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import servidorChat.sop_rmi.ServidorCallbackInt;
 
 /**
  * @author Aliro Correa - Agosto de 2021
@@ -18,22 +13,15 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class ClienteDeObjetos {
     
     public static int PUERTO_NS = 2121;
-    public static int PUERTO_NS_SEGUIMIENTO = 2122;
-    public static String IP_NS = "localhost";
-    
-    public static GestionAnteproyectosInt objRemoto;
-    public static GestionUsuariosInt objRemotoUsuarios;
-    public static SeguimientoAnteproyectosInt objRemotoSeguimiento;
-    public static DirectorCllbckImpl objCllbck;
-    public static User currentUser;
+    public static String IP_NS = "localhost"; 
+
+    public static ServidorCallbackInt objRemoto;
 
     public static void main(String[] args) {
         
-        objRemoto = (GestionAnteproyectosInt) UtilidadesRegistroC.obtenerObjRemoto(IP_NS, PUERTO_NS, "ObjetoRemotoGestionAnteproyecto");
-        objRemotoUsuarios = (GestionUsuariosInt) UtilidadesRegistroC.obtenerObjRemoto(IP_NS, PUERTO_NS, "ObjetoRemotoGestionUsuario");
-        objRemotoSeguimiento = (SeguimientoAnteproyectosInt) UtilidadesRegistroC.obtenerObjRemoto(IP_NS, PUERTO_NS_SEGUIMIENTO, "ObjetoRemotoSeguimientoAnteproyecto");
+        objRemoto = (ServidorCallbackInt) UtilidadesRegistroC.obtenerObjRemoto(IP_NS, PUERTO_NS, "ObjetoRemotoServidorChat");
         
-        if(objRemoto != null && objRemotoUsuarios !=  null && objRemotoSeguimiento != null){
+        if(objRemoto != null){
             setDefaultTheme();
             GUILogin guiLogin = new GUILogin();
             guiLogin.setVisible(true);

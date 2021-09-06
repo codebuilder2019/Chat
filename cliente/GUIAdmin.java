@@ -1,9 +1,11 @@
-package Cliente;
+package cliente;
+
+import java.io.Serializable;
 
 /**
  * @author Aliro Correa - Septiembre de 2021
  */
-public class GUIAdmin extends javax.swing.JFrame {
+public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
 
 
     public GUIAdmin() {
