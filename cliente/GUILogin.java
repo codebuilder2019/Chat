@@ -81,6 +81,13 @@ public class GUILogin extends javax.swing.JFrame  implements Serializable {
 
     public void iniciarSesion(){
         String nickname = this.jTextFieldUsuario.getText();
+        if(nickname.equals("admin"))
+            this.iniciarAdmin();
+        else
+            this.iniciarCliente(nickname);
+    }
+    
+    private void iniciarCliente(String nickname){
         GUICliente guiCliente = new GUICliente();
         try {
             UsuarioCallbackImpl objReferencia = new UsuarioCallbackImpl(guiCliente);
@@ -97,6 +104,11 @@ public class GUILogin extends javax.swing.JFrame  implements Serializable {
         } catch (RemoteException ex) {
            this.mensajeError("Excepcion iniciarSesion() \n" + ex);
         }
+    }
+    
+    private void iniciarAdmin(){
+        GUIAdmin guiAdmin = new GUIAdmin();
+        guiAdmin.setVisible(true);
     }
     
     private void mensajeInformacion(String mensaje){

@@ -56,7 +56,6 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
         jTextAreaChat.setColumns(20);
         jTextAreaChat.setLineWrap(true);
         jTextAreaChat.setRows(5);
-        jTextAreaChat.setText("[Servidor]: 18/05/2021\t20:01\t12 mensajes enviados  \n[Servidor]: 18/05/2021\t20:02\t2 mensajes enviados  \n[Servidor]: 18/05/2021\t20:03\t0 mensajes enviados  \n[Servidor]: 18/05/2021\t20:04\t21 mensajes enviados  \n[Servidor]: 18/05/2021\t20:05\t54 mensajes enviados  ");
         jTextAreaChat.setFocusable(false);
         jScrollPane1.setViewportView(jTextAreaChat);
 
