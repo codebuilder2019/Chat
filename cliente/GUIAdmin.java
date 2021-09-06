@@ -117,6 +117,10 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addMsg(int n){
+        jTextAreaChat.append("mensajes en el ultimo minuto: " + n);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCreditos;
