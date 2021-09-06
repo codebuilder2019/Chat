@@ -109,6 +109,7 @@ public class GUILogin extends javax.swing.JFrame  implements Serializable {
     private void iniciarAdmin(){
         GUIAdmin guiAdmin = new GUIAdmin();
         guiAdmin.setVisible(true);
+	this.dispose();
     }
     
     private void mensajeInformacion(String mensaje){
