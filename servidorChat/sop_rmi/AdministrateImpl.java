@@ -31,11 +31,13 @@ public class AdministrateImpl extends UnicastRemoteObject implements Administrat
 
     @Override
     public void addAdminitrator(AdminCallbackInt administrator) throws RemoteException {
+        System.out.println("Registrando administrador");
         this.administrator = administrator;
     }
 
     @Override
     public void deleteAdminitrator() throws RemoteException {
+        System.out.println("Desconectando administrador");
         this.administrator = null;
     }
 
