@@ -54,19 +54,37 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
     @Override
     public boolean desconectarCliente(String nickname) throws RemoteException {
         System.out.println("Desconectando cliente");
+        
+        String aNickname;
 
-        if(findContact(nickname)) {
-            int contactIndex = this.contacts.indexOf(nickname);
-            this.contacts.remove(contactIndex);
-            
-            for (int i=0; i<this.contacts.size(); i++) {
-                this.contacts.get(i).getObjReference().eliminarContacto(nickname);
+        for (int i=0; i<this.contacts.size(); i++) {
+            aNickname = this.contacts.get(i).getNickname();
+
+            if(nickname.equals(aNickname)){
+                this.contacts.remove(i);
+                
+                for (int j=0; j<this.contacts.size(); j++) {
+                    this.contacts.get(j).getObjReference().eliminarContacto(nickname);
+                }
+                
+                return true;
             }
-
-            return true;
-        } else {
-            return false;
         }
+
+        return false;
+    }
+
+    @Override
+    public String[] obtenerClientes() throws RemoteException {
+        System.out.println("Obtener clientes");
+
+        String[] allContacts = new String[this.contacts.size()];
+
+        for (int i=0; i<this.contacts.size(); i++) {
+            allContacts[i] = this.contacts.get(i).getNickname();
+        }
+
+        return allContacts;
     }
 
     private boolean findContact(String nickname) {

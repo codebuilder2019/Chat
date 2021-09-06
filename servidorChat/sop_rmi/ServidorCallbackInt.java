@@ -12,4 +12,5 @@ public interface ServidorCallbackInt extends Remote {
     public boolean registrarCliente(UsuarioCallbackInt objReferencia, String ncikname) throws RemoteException;
     public void enviarMensaje(String mensaje, String nickname) throws RemoteException;
     public boolean desconectarCliente(String nickname) throws RemoteException;
+    public String[] obtenerClientes() throws RemoteException;
 }
