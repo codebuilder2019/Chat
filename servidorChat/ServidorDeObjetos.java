@@ -1,8 +1,6 @@
 package servidorChat;
 
-import servidorChat.sop_rmi.ServidorCallbackImpl;
-import servidorChat.sop_rmi.Administrate;
-
+import servidorChat.sop_rmi.*;
 import servidorChat.utilidades.UtilidadesConsola;
 import servidorChat.utilidades.UtilidadesRegistroS;
 import java.rmi.RemoteException;
@@ -19,7 +17,7 @@ public class ServidorDeObjetos
             UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoChat, direccionIpNS, numPuertoNS, "ObjetoRemotoServidorChat");
             System.out.println("Objeto remoto01 registrado, esperando peticiones...");
 
-            Administrate objRemotoAdministracion = new Administrate();
+            AdministrateImpl objRemotoAdministracion = new AdministrateImpl();
             UtilidadesRegistroS.arrancarNS(direccionIpNS, numPuertoNS);
             UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoAdministracion, direccionIpNS, numPuertoNS, "ObjetoRemotoAdministracion");
             System.out.println("Objeto remoto02 registrado, esperando peticiones...");
