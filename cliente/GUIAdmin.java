@@ -1,9 +1,13 @@
 package cliente;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  * @author Aliro Correa - Septiembre de 2021
@@ -15,6 +19,7 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
     public GUIAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
     }
 
@@ -24,6 +29,7 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
 
         jPanelSuperior = new javax.swing.JPanel();
         jLabelTituloAdministrador = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanelCentral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaChat = new javax.swing.JTextArea();
@@ -39,26 +45,38 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
         jLabelTituloAdministrador.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelTituloAdministrador.setText("Bievenido Administrador");
 
+        jButton1.setText("Cerrar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSuperiorLayout = new javax.swing.GroupLayout(jPanelSuperior);
         jPanelSuperior.setLayout(jPanelSuperiorLayout);
         jPanelSuperiorLayout.setHorizontalGroup(
             jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSuperiorLayout.createSequentialGroup()
-                .addContainerGap(194, Short.MAX_VALUE)
+                .addContainerGap(189, Short.MAX_VALUE)
                 .addComponent(jLabelTituloAdministrador)
-                .addGap(178, 178, 178))
+                .addGap(76, 76, 76)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanelSuperiorLayout.setVerticalGroup(
             jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabelTituloAdministrador)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTituloAdministrador)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
 
         jTextAreaChat.setColumns(20);
+        jTextAreaChat.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jTextAreaChat.setLineWrap(true);
         jTextAreaChat.setRows(5);
         jTextAreaChat.setFocusable(false);
@@ -122,13 +140,47 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            cliente.ClienteDeObjetos.objRemotoAdmin.deleteAdminitrator();
+        } catch (RemoteException ex) {
+            this.mensajeError("Excepcion desonectarAdministrador() " + ex.getMessage());
+        } finally{
+            GUILogin guiLogin = new GUILogin();
+            guiLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void addMsg(int n){
-        String mensaje = "[" + dateFormat.format(LocalDateTime.now()) + "]" +
-                         " Cantidad de mensajes enviados en el ultimo minuto: " + n;
+        String mensaje = new StringBuilder()
+                .append("[")
+                .append(dateFormat.format(LocalDateTime.now()))
+                .append("]: ")
+                .append("Cantidad de mensajes en el ultimo minuto: ")
+                .append(n)
+                .append("\n").toString();
         jTextAreaChat.append(mensaje);
     }
     
+    public void setConfigDesconexion() {
+        this.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+            try {
+                cliente.ClienteDeObjetos.objRemotoAdmin.deleteAdminitrator();
+                JOptionPane.showMessageDialog(null,"Saliendoso ");
+            } catch (RemoteException ex) {
+                JOptionPane.showMessageDialog(null,"Excepcion setConfigDesconexionAdmin() " + ex.getMessage());
+            }
+        }
+        });
+    }
+    
+    private  void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "ERROR",JOptionPane.ERROR_MESSAGE);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCreditos;
     private javax.swing.JLabel jLabelTituloAdministrador;

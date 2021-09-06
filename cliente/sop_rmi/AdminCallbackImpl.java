@@ -1,15 +1,17 @@
 package cliente.sop_rmi;
 
 import cliente.GUIAdmin;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * @author Aliro Correa - Septiembre de 2021
  */
-public class AdminCallbackImpl implements AdminCallbackInt{
+public class AdminCallbackImpl extends UnicastRemoteObject implements AdminCallbackInt{
 
     private GUIAdmin guiAdmin;
     
-    public AdminCallbackImpl(GUIAdmin guiAdmin) {
+    public AdminCallbackImpl(GUIAdmin guiAdmin) throws RemoteException {
         super();
         this.guiAdmin = guiAdmin;
     }
@@ -23,7 +25,7 @@ public class AdminCallbackImpl implements AdminCallbackInt{
     }
     
     @Override
-    public void notificar(int numeroMensajes) {
+    public void notificar(int numeroMensajes) throws RemoteException{
        this.guiAdmin.addMsg(numeroMensajes);
     }
     

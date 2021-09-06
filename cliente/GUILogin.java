@@ -112,14 +112,15 @@ public class GUILogin extends javax.swing.JFrame  implements Serializable {
     private void iniciarAdmin(){
         boolean conexion = cliente.ClienteDeObjetos.obtenerObjAdmin();
         if(conexion){
-            GUIAdmin guiAdmin = new GUIAdmin();
-            AdminCallbackImpl objReferenciaAdmin = new AdminCallbackImpl(guiAdmin);
             try {
+                GUIAdmin guiAdmin = new GUIAdmin();
+                AdminCallbackImpl objReferenciaAdmin = new AdminCallbackImpl(guiAdmin);
                 cliente.ClienteDeObjetos.objRemotoAdmin.addAdminitrator(objReferenciaAdmin);
+                guiAdmin.setConfigDesconexion();
                 guiAdmin.setVisible(true);
                 this.dispose();
             } catch (RemoteException ex) {
-                this.mensajeError("Excepcion iniciarAdmin() \n" + ex);
+                this.mensajeError("Excepcion Login iniciarAdmin() \n" + ex);
             }
         }
     }
