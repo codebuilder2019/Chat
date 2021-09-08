@@ -4,7 +4,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 public class GUICliente extends javax.swing.JFrame implements Serializable{
     
     private String nickname;
+    private DateTimeFormatter dateFormat;
 
     public GUICliente() {
         initComponents();
@@ -21,6 +23,7 @@ public class GUICliente extends javax.swing.JFrame implements Serializable{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.jList1Model = new DefaultListModel();
         this.jListUsuarios.setModel(jList1Model);
+        this.dateFormat = DateTimeFormatter.ofPattern("HH:mm");
     }
 
     @SuppressWarnings("unchecked")
@@ -233,7 +236,7 @@ public class GUICliente extends javax.swing.JFrame implements Serializable{
 
     public void fijarTexto(String nombre, String msg) {
         //Este método se invoca para informar al cliente de un mensaje nuevo en el chat
-        jTextAreaChat.append("[" + nombre + "]: " + msg + "\n");
+        jTextAreaChat.append("" + dateFormat.format(LocalDateTime.now()) + " ["+ nombre +"]: " + msg + "\n");
     }
 
     public void fijarContacto(String nombre) {
@@ -254,7 +257,7 @@ public class GUICliente extends javax.swing.JFrame implements Serializable{
     
     public void enviarMensaje() {
         try {
-            String mensaje = this.jTextAreaMensaje.getText();
+            String mensaje = this.jTextAreaMensaje.getText().trim();
             if (mensaje.length() > 0) {
                 cliente.ClienteDeObjetos.objRemoto.enviarMensaje(mensaje, nickname);
                 this.jTextAreaMensaje.setText("");
