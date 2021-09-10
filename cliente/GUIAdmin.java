@@ -168,7 +168,6 @@ public class GUIAdmin extends javax.swing.JFrame  implements Serializable {
         public void windowClosing(WindowEvent e) {
             try {
                 cliente.ClienteDeObjetos.objRemotoAdmin.deleteAdminitrator();
-                JOptionPane.showMessageDialog(null,"Saliendoso ");
             } catch (RemoteException ex) {
                 JOptionPane.showMessageDialog(null,"Excepcion setConfigDesconexionAdmin() " + ex.getMessage());
             }
